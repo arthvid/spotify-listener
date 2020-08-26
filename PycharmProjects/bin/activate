@@ -74,3 +74,6 @@ fi
 if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
     hash -r
 fi
+
+export client_key = "2d7a852c91a14cc48f9b10ee14087baf"
+export client_secret = "3952ed759ca443b7a82480279ec73ef5"

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/results.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=ProximaNova:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="spotifyResults">
+   {% for ranking in rankings %}
+            <ul>
+                <li>{{ranking}}: Acoustic score is {{rankings[ranking][0]}} and Dance score is {{rankings[ranking][1]}}</li>
+            </ul>
+{% endfor %}
+</div>
+</body>
+</html>

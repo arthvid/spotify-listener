@@ -1,0 +1,30 @@
+h2 {
+    font-family: 'ProximaNova', serif;
+    font-size: 24px;
+    padding-left: 20px;
+}
+
+#spotifyForm {
+    font-family: 'ProximaNova', serif;
+    font-size: 24px;
+    padding: 20px;
+}
+
+#spotifyInput {
+    font-family: 'ProximaNova', serif;
+    font-size: 24px;
+}
+
+#spotifySubmit {
+    font-family: 'ProximaNova', serif;
+    font-size: 24px;
+    color: white;
+    background-color: salmon;
+    padding: 5px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#spotifySubmit:hover {
+    cursor: pointer;
+}

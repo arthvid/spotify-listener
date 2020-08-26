@@ -2,7 +2,7 @@ import requests
 import spotipy
 from spotipy import SpotifyClientCredentials
 import json
-from secrets import my_id, client_id, client_secret
+from secrets import client_id, client_secret
 
 credentials = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 spot = spotipy.Spotify(client_credentials_manager=credentials)
@@ -11,17 +11,24 @@ spot = spotipy.Spotify(client_credentials_manager=credentials)
 class PlaylistCreator:
 
     def __init__(self):
-        self.my_id = my_id
         self.mapping = {}
 
     def get_playlists(self, user_id):
         playlists = spot.user_playlists(user=user_id)["items"]
 
+        debug = 0
+
         for playlist in playlists:
             self.parse_playlist(playlist)
+            debug += 1
+            if debug == 5:
+                break
 
         for key in self.mapping.keys():
             print(f"Playlist {key}: acoustic ({self.mapping[key][0]}) dance ({self.mapping[key][1]})")
+
+        return self.mapping
+
 
     def parse_playlist(self, playlist):
         playlist_name = playlist["name"]
@@ -31,6 +38,7 @@ class PlaylistCreator:
 
         acoustic_score = 0
         dance_score = 0
+        count = 0
 
         for track in tracks:
             track_object = track["track"]
@@ -39,13 +47,12 @@ class PlaylistCreator:
             features = spot.audio_features(tracks=[track_id])[0]
             acoustic_score += round(features["acousticness"], 2)
             dance_score += round(features["danceability"], 2)
+            count += 1
 
-        scores = [acoustic_score, dance_score]
+        scores = [round(acoustic_score/count, 2), round(dance_score/count, 2)]
         self.mapping[playlist_name] = scores
 
 
 scraper = PlaylistCreator()
-scraper.get_playlists("sourabhm3")
-
 
 
